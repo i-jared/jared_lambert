@@ -1,4 +1,4 @@
-body {
+.container {
     padding: 1.25rem;
     max-width: 43.75rem;
     width: 100%;
@@ -8,7 +8,7 @@ body {
 a {
     color: #000;
 }
-body {
+.container {
     font-size: 1rem; /* Base font size */
 }
 
@@ -39,7 +39,7 @@ h3 {
 }
 
 @media screen and (max-width: 75rem) { /* 1200px / 16px */
-    body {
+    .container {
         max-width: 100%;
         font-size: 3.125rem; /* 18px / 16px */
     }
@@ -59,4 +59,40 @@ h3 {
     .section {
         margin-top: 7.5rem; /* 50px / 16px */
     }
+}
+
+#hidden_pixel_1 {
+    position: absolute;
+    top: 200px;
+    left: 50px;
+    width: 10px;
+    height: 10px;
+    background-color: black;
+}
+
+#hidden_pixel_2 {
+    position: absolute;
+    top: 300px;
+    right: 70px;
+    width: 10px;
+    height: 10px;
+    background-color: black;
+}
+
+#hidden_pixel_3 {
+    position: absolute;
+    top: 500px;
+    right: 100px;
+    width: 10px;
+    height: 10px;
+    background-color: black;
+}
+
+#hidden_pixel_4 {
+    position: absolute;
+    top: 1000px;
+    left: 100px;
+    width: 10px;
+    height: 10px;
+    background-color: black;
 }
