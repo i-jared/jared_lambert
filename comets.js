@@ -1,17 +1,19 @@
 function startTheFire() {
   // Load the comets sprite sheet
   const cometSpriteSheet = new Image();
+  const explosionSpriteSheet = new Image();
   cometSpriteSheet.src = "./fun/meteor.png";
+  explosionSpriteSheet.src = "./fun/explosion.png";
 
   // Wait for the image to load before proceeding
   cometSpriteSheet.onload = () => {
     // Your existing code and logic can go here
     // You can use the cometSpriteSheet for drawing comets
-    sendTheFire(cometSpriteSheet);
+    sendTheFire(cometSpriteSheet, explosionSpriteSheet);
   };
 }
 
-function sendTheFire(cometSpriteSheet) {
+function sendTheFire(cometSpriteSheet, explosionSpriteSheet) {
   const links = [
     "https://open.spotify.com/track/2LD2gT7gwAurzdQDQtILds?si=fdaa4fb69cea4daa",
     "./fun/cat.jpeg",
@@ -35,13 +37,15 @@ function sendTheFire(cometSpriteSheet) {
   const height = canvas.height;
 
   // Comet properties
+  const explosionSize = 128;
   const cometWidth = 64;
   const cometHeight = 64;
   const cometSpeed = 2;
   const updateSpeed = 30;
-
+  const cometUpdateSpeed = 2;
   // Array to store active comets
   let comets = [];
+  let explosions = [];
 
   // Function to create a new comet
   function createComet() {
@@ -83,24 +87,42 @@ function sendTheFire(cometSpriteSheet) {
   function updateAndDrawComets() {
     ctx.clearRect(0, 0, width, height);
 
-    comets = comets.filter((comet) => {
+    comets = comets.filter((comet, index) => {
       comet.x += comet.dx;
       comet.y += comet.dy;
-      comet.frame = (comet.frame + 1) % (4 * updateSpeed / cometSpeed);
-      const imageOffset = Math.floor(comet.frame / updateSpeed * cometSpeed) * 64;
+      comet.frame = (comet.frame + 1) % ((4 * updateSpeed) / cometSpeed);
+      const imageOffset =
+        Math.floor((comet.frame / updateSpeed) * cometSpeed) * 64;
+
+      // Check for collisions with other comets
+      for (let i = index + 1; i < comets.length; i++) {
+        const otherComet = comets[i];
+        const dx = comet.x - otherComet.x;
+        const dy = comet.y - otherComet.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < cometWidth) {
+          // Collision detected, create an explosion
+          explosions.push({
+            x: (comet.x + otherComet.x) / 2,
+            y: (comet.y + otherComet.y) / 2,
+            frame: 0,
+          });
+
+          // Remove both comets
+          comets.splice(i, 1);
+          return false;
+        }
+      }
 
       // Draw the comet using nearest neighbor scaling
-      // Save the current context state
       ctx.save();
-      
-      // Translate to the center of where the comet will be drawn
-      ctx.translate(Math.round(comet.x + cometWidth / 2), Math.round(comet.y + cometHeight / 2));
-      
-      // Rotate the comet to face its direction of travel
+      ctx.translate(
+        Math.round(comet.x + cometWidth / 2),
+        Math.round(comet.y + cometHeight / 2)
+      );
       const angle = Math.atan2(comet.dy, comet.dx) + Math.PI / 4;
       ctx.rotate(angle);
-      
-      // Draw the rotated image, offset by half its dimensions to center it
       ctx.drawImage(
         cometSpriteSheet,
         imageOffset,
@@ -112,8 +134,6 @@ function sendTheFire(cometSpriteSheet) {
         cometWidth,
         cometHeight
       );
-      
-      // Restore the context to its original state
       ctx.restore();
 
       // Remove comet if it's out of bounds
@@ -123,6 +143,26 @@ function sendTheFire(cometSpriteSheet) {
         comet.y < -cometHeight ||
         comet.y > height + cometHeight
       );
+    });
+
+    // Draw and update explosions
+    explosions = explosions.filter((explosion) => {
+      const imageOffset =
+        Math.floor(explosion.frame / cometUpdateSpeed) * 32;
+      ctx.drawImage(
+        explosionSpriteSheet,
+        imageOffset,
+        0,
+        32,
+        32,
+        explosion.x - explosionSize / 4,
+        explosion.y - explosionSize / 4,
+        explosionSize,
+        explosionSize
+      );
+
+      explosion.frame = (explosion.frame + 1);
+      return explosion.frame < 4 * cometUpdateSpeed; // Assuming 16 frames in the explosion animation
     });
 
     requestAnimationFrame(updateAndDrawComets);
