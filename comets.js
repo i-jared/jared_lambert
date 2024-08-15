@@ -25,8 +25,8 @@ function sendTheFire(cometSpriteSheet, explosionSpriteSheet) {
   ];
 
   const canvas = document.getElementById("comets");
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  canvas.width = document.documentElement.scrollWidth;
+  canvas.height = document.documentElement.scrollHeight;
   const ctx = canvas.getContext("2d");
   ctx.webkitImageSmoothingEnabled = false;
   ctx.mozImageSmoothingEnabled = false;
