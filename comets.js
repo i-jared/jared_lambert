@@ -148,6 +148,7 @@ function sendTheFire(cometSpriteSheet) {
         clickY <= comet.y + cometHeight
       ) {
         window.open(comet.link, "_blank");
+        event.preventDefault();
         break;
       }
     }
