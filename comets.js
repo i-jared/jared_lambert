@@ -162,7 +162,7 @@ function sendTheFire(cometSpriteSheet, explosionSpriteSheet) {
       );
 
       explosion.frame = (explosion.frame + 1);
-      return explosion.frame < 4 * cometUpdateSpeed; // Assuming 16 frames in the explosion animation
+      return explosion.frame < 9 * cometUpdateSpeed; // Assuming 16 frames in the explosion animation
     });
 
     requestAnimationFrame(updateAndDrawComets);
@@ -187,7 +187,24 @@ function sendTheFire(cometSpriteSheet, explosionSpriteSheet) {
         clickY >= comet.y &&
         clickY <= comet.y + cometHeight
       ) {
-        window.open(comet.link, "_blank");
+        // Remove the clicked comet
+        const index = comets.indexOf(comet);
+        if (index > -1) {
+          comets.splice(index, 1);
+        }
+
+        // Add an explosion at the comet's position
+        explosions.push({
+          x: comet.x + cometWidth / 2,
+          y: comet.y + cometHeight / 2,
+          frame: 0
+        });
+
+        // Delay opening the link by 0.3 seconds
+        setTimeout(() => {
+          window.open(comet.link, "_blank");
+        }, 300);
+
         event.preventDefault();
         break;
       }
