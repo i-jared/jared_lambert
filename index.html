@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="format-detection" content="telephone=no"/>
         <title>Jared Lambert</title>
         <link rel="stylesheet" href="style.css">
@@ -8,6 +10,12 @@
     <body>
         <canvas id="comets"></canvas>
         <script src="comets.js"></script>
+        
+        <div id="globes-container"></div>
+        <script type="module">
+            import globes from 'https://i-jared.github.io/globes-golf/globes.js';
+            globes(document.getElementById('globes-container'));
+        </script>
 
         <div class="container">
             <h1>Jared Lambert</h1>
