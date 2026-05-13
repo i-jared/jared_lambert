@@ -170,8 +170,10 @@ function renderPostPage(post, contentHtml) {
         <link rel="stylesheet" href="../style.css">
     </head>
     <body>
+        <div class="corner-sun" aria-hidden="true"></div>
         <canvas id="comets"></canvas>
         <script src="../comets.js"></script>
+        <script src="../site.js"></script>
 
         <div id="globes-container"></div>
         <script type="module">
@@ -190,6 +192,26 @@ function renderPostPage(post, contentHtml) {
 ${contentHtml.split('\n').map((line) => `                ${line}`).join('\n')}
             </article>
         </div>
+
+        <footer class="garden-footer" aria-hidden="true">
+            <div class="garden-tree tree-one">
+                <span class="tree-top"></span>
+                <span class="tree-trunk"></span>
+            </div>
+            <div class="garden-tree tree-two">
+                <span class="tree-top"></span>
+                <span class="tree-trunk"></span>
+            </div>
+            <div class="garden-tree tree-three">
+                <span class="tree-top"></span>
+                <span class="tree-trunk"></span>
+            </div>
+            <div class="garden-flower flower-one"></div>
+            <div class="garden-flower flower-two"></div>
+            <div class="garden-flower flower-three"></div>
+            <div class="garden-flower flower-four"></div>
+            <div class="grass"></div>
+        </footer>
     </body>
 </html>
 `;

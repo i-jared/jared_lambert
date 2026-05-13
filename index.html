@@ -8,8 +8,10 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
+        <div class="corner-sun" aria-hidden="true"></div>
         <canvas id="comets"></canvas>
         <script src="comets.js"></script>
+        <script src="site.js"></script>
         
         <div id="globes-container"></div>
         <script type="module">
@@ -36,7 +38,7 @@
             </div>
 
             <!-- PROJECTS TAB -->
-            <div id="projects" class="tab-content active">
+            <div id="projects-tab" class="tab-content active">
                 <div class="section">
                     <div class="project">
                         <div class="project-title">
@@ -174,7 +176,7 @@
             </div>
 
             <!-- BLOG TAB -->
-            <div id="blog" class="tab-content">
+            <div id="blog-tab" class="tab-content">
                 <div class="section">
                     <div id="blog-list">
                         <!-- Blog posts will be loaded here -->
@@ -183,7 +185,7 @@
             </div>
 
             <!-- WORK TAB -->
-            <div id="work" class="tab-content">
+            <div id="work-tab" class="tab-content">
                 <div class="section">
                     <div class="work">
                         <div class="work-title">
@@ -243,6 +245,26 @@
             </div>
         </div>
 
+        <footer class="garden-footer" aria-hidden="true">
+            <div class="garden-tree tree-one">
+                <span class="tree-top"></span>
+                <span class="tree-trunk"></span>
+            </div>
+            <div class="garden-tree tree-two">
+                <span class="tree-top"></span>
+                <span class="tree-trunk"></span>
+            </div>
+            <div class="garden-tree tree-three">
+                <span class="tree-top"></span>
+                <span class="tree-trunk"></span>
+            </div>
+            <div class="garden-flower flower-one"></div>
+            <div class="garden-flower flower-two"></div>
+            <div class="garden-flower flower-three"></div>
+            <div class="garden-flower flower-four"></div>
+            <div class="grass"></div>
+        </footer>
+
         <script src="blogs/blog-data.js"></script>
         <script>
             // Tab switching functionality
@@ -260,7 +282,7 @@
                 });
 
                 // Show selected tab content
-                document.getElementById(tabName).classList.add('active');
+                document.getElementById(`${tabName}-tab`).classList.add('active');
 
                 const activeButton = document.querySelector(`.tab-button[data-tab="${tabName}"]`);
                 if (activeButton) {
@@ -275,13 +297,14 @@
                 if (updateHash) {
                     const nextHash = tabName === 'projects' ? '' : `#${tabName}`;
                     if (window.location.hash !== nextHash) {
-                        if (nextHash) {
-                            window.location.hash = nextHash;
-                        } else {
-                            history.replaceState(null, '', window.location.pathname + window.location.search);
-                        }
+                        updateUrlHash(nextHash);
                     }
                 }
+            }
+
+            function updateUrlHash(hash) {
+                const nextUrl = `${window.location.pathname}${window.location.search}${hash}`;
+                history.pushState(null, '', nextUrl);
             }
 
             // Load and display blog posts
@@ -318,7 +341,7 @@
             }
 
             function goToBlogPage(page) {
-                window.location.hash = page === 1 ? '#blog' : `#blog-page-${page}`;
+                updateUrlHash(page === 1 ? '#blog' : `#blog-page-${page}`);
                 loadBlogPosts(page);
             }
 
@@ -360,6 +383,14 @@
             }
 
             window.addEventListener('hashchange', () => {
+                syncTabFromHash();
+            });
+
+            window.addEventListener('popstate', () => {
+                syncTabFromHash();
+            });
+
+            function syncTabFromHash() {
                 if (window.location.hash.startsWith('#blog')) {
                     showTab('blog', false);
                 } else if (window.location.hash === '#work') {
@@ -367,7 +398,7 @@
                 } else if (!window.location.hash) {
                     showTab('projects', false);
                 }
-            });
+            }
         </script>
     </body>
 </html>
