@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+echo "Building blog posts..."
+node scripts/build-blog.js
+
+git add -A blogs
+
+echo "Blog posts built and staged."

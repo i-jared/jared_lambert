@@ -1,36 +1,70 @@
 # Adding Blog Posts
 
-To add a new blog post:
+Write posts in Markdown. The commit hook generates the HTML pages and homepage blog list automatically.
 
-1. **Create the HTML file** in the `blogs/` folder (e.g., `my-new-post.html`)
-2. **Add media** to `blogs/media/` folder if needed
-3. **Update the blog list** in `index.html` by adding to the `blogPosts` array
+## Add a Post
 
-## Blog Post Template
+1. Create a Markdown file in `blogs/posts/`, for example `blogs/posts/my-new-post.md`
+2. Add front matter at the top:
 
-Copy `blogs/first-post.html` as a starting template. Key things to update:
-
-- Title tag and H1 heading
-- Date in the blog-meta div
-- Content in the article section
-- Link to media files should use `media/filename.ext`
-
-## Example Blog Post Entry
-
-In `index.html`, find the `blogPosts` array and add:
-
-```javascript
-{
-    title: "Your Post Title",
-    date: "2025-01-20",
-    description: "A brief description of your post.",
-    file: "your-post-file.html"
-}
+```md
+---
+title: Your Post Title
+date: 2026-05-13
+description: A brief description of your post.
+slug: your-post-title
+pinned: false
+---
 ```
+
+3. Write the rest of the post in Markdown.
+4. Commit and push.
+
+## Pre-Commit Hook
+
+This repo has a pre-commit hook in `.githooks/pre-commit`. It runs the blog builder before every commit and automatically stages the generated blog HTML and blog index data.
+
+Enable it once per clone:
+
+```sh
+git config core.hooksPath .githooks
+```
+
+After that, the normal flow is:
+
+```sh
+git add blogs/posts/my-post.md
+git commit -m "Add blog post"
+git push
+```
+
+The commit hook will add the generated `blogs/*.html` files and `blogs/blog-data.js` to the same commit.
+
+Posts are listed newest first. The blog index paginates automatically at 10 posts per page.
+
+To pin a post to the top of the list, set:
+
+```md
+pinned: true
+```
+
+Pinned posts appear before unpinned posts. When multiple posts are pinned, pinned posts are still sorted newest first.
+
+## Supported Markdown
+
+The local builder supports the simple syntax this site needs:
+
+- Paragraphs
+- `##`, `###`, and `####` headings
+- Bullet lists
+- Links: `[label](https://example.com)`
+- Images: `![alt](media/image.jpg)`
+- Bold, italic, inline code, and fenced code blocks
 
 ## Media Storage
 
-Store images and other media in `blogs/media/` and reference them in your HTML as:
-```html
-<img src="media/your-image.jpg" alt="Description">
+Store images and other media in `blogs/media/` and reference them in Markdown as:
+
+```md
+![Description](media/your-image.jpg)
 ```
