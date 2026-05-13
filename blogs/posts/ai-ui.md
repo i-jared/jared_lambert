@@ -1,8 +1,8 @@
 ---
-title: First Commit
+title: AI UI
 date: 2026-05-13
 description: The UI of AI
-slug: ai-ui
+slug: The optimal UI for our AI Software Engineering
 ---
 
 At the time of writing, the perfect UI for managing AI agents for your work and coding hasn't been created, but we're close. We've been skirting around the edges. Prominent contenders include Conductor, Codex, Cursor, and Hermes Agent. I'm telling you, we're close! And I think Codex will get there eventually. Here's what they need:

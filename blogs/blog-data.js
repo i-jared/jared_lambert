@@ -1,11 +1,11 @@
 window.blogPosts = [
     {
-        "title": "First Commit",
+        "title": "AI UI",
         "date": "2026-05-13",
         "description": "The UI of AI",
-        "slug": "ai-ui",
+        "slug": "The optimal UI for our AI Software Engineering",
         "pinned": false,
-        "file": "ai-ui.html"
+        "file": "The optimal UI for our AI Software Engineering.html"
     },
     {
         "title": "First Commit",

@@ -246,7 +246,7 @@
         <script src="blogs/blog-data.js"></script>
         <script>
             // Tab switching functionality
-            function showTab(tabName) {
+            function showTab(tabName, updateHash = true) {
                 // Hide all tab contents
                 const contents = document.querySelectorAll('.tab-content');
                 contents.forEach(content => {
@@ -270,6 +270,17 @@
                 // Load blog posts if blog tab is selected
                 if (tabName === 'blog') {
                     loadBlogPosts();
+                }
+
+                if (updateHash) {
+                    const nextHash = tabName === 'projects' ? '' : `#${tabName}`;
+                    if (window.location.hash !== nextHash) {
+                        if (nextHash) {
+                            window.location.hash = nextHash;
+                        } else {
+                            history.replaceState(null, '', window.location.pathname + window.location.search);
+                        }
+                    }
                 }
             }
 
@@ -343,12 +354,18 @@
             }
 
             if (window.location.hash.startsWith('#blog')) {
-                showTab('blog');
+                showTab('blog', false);
+            } else if (window.location.hash === '#work') {
+                showTab('work', false);
             }
 
             window.addEventListener('hashchange', () => {
                 if (window.location.hash.startsWith('#blog')) {
-                    showTab('blog');
+                    showTab('blog', false);
+                } else if (window.location.hash === '#work') {
+                    showTab('work', false);
+                } else if (!window.location.hash) {
+                    showTab('projects', false);
                 }
             });
         </script>

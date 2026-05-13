@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="format-detection" content="telephone=no"/>
+        <title>AI UI - Jared Lambert</title>
+        <link rel="stylesheet" href="../style.css">
+    </head>
+    <body>
+        <canvas id="comets"></canvas>
+        <script src="../comets.js"></script>
+
+        <div id="globes-container"></div>
+        <script type="module">
+            import globes from 'https://i-jared.github.io/globes-golf/globes.js';
+            globes(document.getElementById('globes-container'));
+        </script>
+
+        <div class="container">
+            <a href="../index.html#blog" class="back-link">Back to Blog</a>
+            <article class="blog-content">
+                <div class="blog-header">
+                    <h1>AI UI</h1>
+                    <div class="blog-meta">May 13, 2026</div>
+                </div>
+
+                <p>At the time of writing, the perfect UI for managing AI agents for your work and coding hasn&#39;t been created, but we&#39;re close. We&#39;ve been skirting around the edges. Prominent contenders include Conductor, Codex, Cursor, and Hermes Agent. I&#39;m telling you, we&#39;re close! And I think Codex will get there eventually. Here&#39;s what they need:</p>
+                <ul>
+                <li>Simple input interface - STT and typing</li>
+                <li>Strong coding agent</li>
+                <li>Orchestration of coding agents</li>
+                <li>Separate contexts</li>
+                <li>Mobile-friendly platform</li>
+                </ul>
+                <p>Let&#39;s break down each point:</p>
+                <h3>input interfaces</h3>
+                <p>Most apps are focused on typing only. For the future of software engineering, I think we need flexible speech inputs as well. I don&#39;t want to be tied to my desk anymore. I want to be free! That means voice input for mobile use as well as typing input.</p>
+                <h3>Strong coding agent</h3>
+                <p>Many strong contenders here: Opencode + Kimi, Cursor + composer2, but the undisputed champ right now is Codex + GPT 5.5. As long as you have a good one, that&#39;s all you need. We&#39;re flexible here.</p>
+                <h3>Orchestration</h3>
+                <p>This is one of the biggest things we&#39;re missing at this point. Hermes is the best attempt so far, but it&#39;s lacking. I honestly haven&#39;t tried tools like Gas Town - it seems so convoluted, it couldn&#39;t possibly be the right solution. The thing is that <em>our orchestrator doesn&#39;t have to be smart</em>, it just has to be good at orchestrating.</p>
+                <p>Let me give you an example of what I mean: Let&#39;s say I&#39;m building a new website with a frontend and backend, and I want to build a certain feature. My instructions should be on the level of: &quot;build the UI for this feature and the endpoints we need&quot;. The orchestrator should then communicate with the smart coding agent in a way that works for the coding agent.</p>
+                <p>I&#39;ve been using Coding agents for ~100% of my development since Jan 2025. In that time I&#39;ve learned when a feature should be split into smaller tasks, when I can delegate to subagents or separate coding agent instances, how to best communicate to the agent, etc. My orchestrator just needs to understand those things - I just need it to understand how to hand the heavy lifting off to Codex.</p>
+                <p><strong>It should go something like this:</strong> me &gt; &quot;go build this feature&quot; orchestrator &gt; &quot;ok!&quot; orchestrator &gt; &quot;codex, how should we build this feature?&quot; codex &gt; &quot;we need this UI and these endpoints&quot; orchestrator &gt; &quot;create sub agents to build these&quot; OR &quot;codex 1, build this. codex 2, build this.&quot;</p>
+                <h3>Mobile friendly</h3>
+                <p>I&#39;m tired of sitting at a desk with my computer! I was born to roam free! We need a platform that can work locally from my desktop and managed from a mobile platform connected over tailscale. I haven&#39;t had a lot of luck with remote workspaces up to this point. The environment is hard to configure just right, and it seems like it never runs properly. I already have everything running on my computer - let&#39;s just use that.</p>
+                <p>So I&#39;m probably going to build this if no one else does! I think Codex is going to get there but I&#39;m not sure if I want to wait 6 months for it to happen.</p>
+            </article>
+        </div>
+    </body>
+</html>
