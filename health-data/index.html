@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="format-detection" content="telephone=no">
+        <title>Health Provider Payment Analytics | Jared Lambert</title>
+        <link rel="stylesheet" href="health-data.css">
+    </head>
+    <body>
+        <main class="page-shell">
+            <nav class="top-nav" aria-label="Site navigation">
+                <a href="../">Jared Lambert</a>
+                <span>/</span>
+                <span>Health Data</span>
+            </nav>
+
+            <header class="case-header">
+                <h1>Behavioral health payer percentile analysis</h1>
+                <p class="intro">
+                    Built a pipeline for provider payment transparency data, sifting through 200 TB of source files,
+                    processing 2 TB locally, and distilling the 2 GB target dataset into a compact workbook for payer
+                    family rate comparison.
+                </p>
+                <a class="download-link" href="rate-percentiles-by-payer-family.xlsx" download>Download XLSX</a>
+            </header>
+
+            <section class="metrics" aria-label="Project scale">
+                <div>
+                    <strong>200 TB</strong>
+                    <span>sifted</span>
+                </div>
+                <div>
+                    <strong>2 TB</strong>
+                    <span>processed</span>
+                </div>
+                <div>
+                    <strong>2 GB</strong>
+                    <span>distilled</span>
+                </div>
+            </section>
+
+            <section class="workbook-panel" aria-label="Workbook preview">
+                <div class="workbook-header">
+                    <div>
+                        <h2>Workbook Preview</h2>
+                        <p id="workbook-meta">Loading workbook data...</p>
+                    </div>
+                    <label class="search-label">
+                        <span>Search</span>
+                        <input id="sheet-search" type="search" placeholder="Filter rows" autocomplete="off" disabled>
+                    </label>
+                </div>
+
+                <div id="sheet-tabs" class="sheet-tabs" role="tablist" aria-label="Workbook sheets"></div>
+                <div id="status" class="status">Loading workbook data...</div>
+                <div id="grid-wrap" class="grid-wrap" hidden>
+                    <table id="sheet-grid" class="sheet-grid" aria-label="Selected workbook sheet"></table>
+                </div>
+            </section>
+        </main>
+
+        <script src="health-data.js"></script>
+    </body>
+</html>
